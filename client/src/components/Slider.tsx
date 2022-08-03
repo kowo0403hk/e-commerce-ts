@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
 
@@ -13,7 +13,6 @@ const Container = styled.div`
 
 interface ArrowProps {
   direction: string;
-  handleClick?: (direction: string) => void;
 }
 
 const Arrow = styled.div<ArrowProps>`
