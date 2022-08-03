@@ -66,7 +66,6 @@ interface ImgProps {
 }
 
 const Image = styled.img<ImgProps>`
-  src: ${(props) => props.src};
   height: 80%;
 `;
 
