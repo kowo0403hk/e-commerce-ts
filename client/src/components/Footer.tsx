@@ -34,9 +34,18 @@ const SocialIcon = styled.h1`
 
 const Center = styled.div`
   flex: 1;
+  padding: 20px;
 `;
+
+const Title = styled.h3``;
+
+const List = styled.ul``;
+
+const ListItem = styled.li``;
+
 const Right = styled.div`
   flex: 1;
+  padding: 20px;
 `;
 
 const Footer: FC = () => {
