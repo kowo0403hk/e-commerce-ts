@@ -8,6 +8,12 @@ const Container = styled.div`
 const Left = styled.div`
   flex: 1;
 `;
+
+const Logo = styled.h1``;
+const Description = styled.p``;
+const SocialContainer = styled.h1``;
+const SocialIcon = styled.h1``;
+
 const Center = styled.div`
   flex: 1;
 `;
