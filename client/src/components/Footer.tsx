@@ -7,12 +7,30 @@ const Container = styled.div`
 `;
 const Left = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 `;
 
 const Logo = styled.h1``;
-const Description = styled.p``;
-const SocialContainer = styled.h1``;
-const SocialIcon = styled.h1``;
+const Description = styled.p`
+  margin: 20px 0px;
+`;
+const SocialContainer = styled.h1`
+  display: flex;
+`;
+
+const SocialIcon = styled.h1`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  background-color: #${(props) => props.color};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+`;
 
 const Center = styled.div`
   flex: 1;
@@ -31,16 +49,16 @@ const Footer: FC = () => {
           information, please visit their official websites.
         </Description>
         <SocialContainer>
-          <SocialIcon>
+          <SocialIcon color="3B5999">
             <Facebook />
           </SocialIcon>
-          <SocialIcon>
+          <SocialIcon color="E4405F">
             <Instagram />
           </SocialIcon>
-          <SocialIcon>
+          <SocialIcon color="55ACEE">
             <Twitter />
           </SocialIcon>
-          <SocialIcon>
+          <SocialIcon color="E60023">
             <Pinterest />
           </SocialIcon>
         </SocialContainer>
