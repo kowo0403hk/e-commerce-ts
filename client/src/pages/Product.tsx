@@ -1,3 +1,4 @@
+import { Add, Remove } from "@material-ui/icons";
 import { FC } from "react";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
@@ -73,6 +74,42 @@ const FilterSize = styled.select`
 
 const FilterSizeOption = styled.option``;
 
+const AddContainer = styled.div`
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const AmountContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+`;
+
+const Amount = styled.span`
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid rgb(10, 186, 181);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+`;
+
+const Button = styled.button`
+  padding: 15px;
+  border: 2px solid rgb(10, 186, 181);
+  background-color: white;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f8f4f4;
+  }
+`;
+
 const Product: FC = () => {
   return (
     <Container>
@@ -107,6 +144,14 @@ const Product: FC = () => {
               </FilterSize>
             </Filter>
           </FilterContainer>
+          <AddContainer>
+            <AmountContainer>
+              <Remove cursor="pointer" />
+              <Amount>1</Amount>
+              <Add cursor="pointer" />
+            </AmountContainer>
+            <Button>Add to Cart</Button>
+          </AddContainer>
         </InfoContainer>
       </Wrapper>
       <NewsLetter />
