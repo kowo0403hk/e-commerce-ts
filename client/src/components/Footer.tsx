@@ -1,4 +1,12 @@
-import { Facebook, Instagram, Pinterest, Twitter } from "@material-ui/icons";
+import {
+  Facebook,
+  Instagram,
+  MailOutline,
+  Phone,
+  Pinterest,
+  Room,
+  Twitter,
+} from "@material-ui/icons";
 import { FC } from "react";
 import styled from "styled-components";
 
@@ -37,11 +45,22 @@ const Center = styled.div`
   padding: 20px;
 `;
 
-const Title = styled.h3``;
+const Title = styled.h3`
+  margin-bottom: 30px;
+`;
 
-const List = styled.ul``;
+const List = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+`;
 
-const ListItem = styled.li``;
+const ListItem = styled.li`
+  width: 50%;
+  margin-bottom: 10px;
+`;
 
 const Right = styled.div`
   flex: 1;
@@ -72,8 +91,32 @@ const Footer: FC = () => {
           </SocialIcon>
         </SocialContainer>
       </Left>
-      <Center></Center>
-      <Right></Right>
+      <Center>
+        <Title>Site Map</Title>
+        <List>
+          <ListItem>Home</ListItem>
+          <ListItem>Cart</ListItem>
+          <ListItem>Men's Fashion</ListItem>
+          <ListItem>Women's Fashion</ListItem>
+          <ListItem>Accessories</ListItem>
+          <ListItem>My Account</ListItem>
+          <ListItem>Order Tracking</ListItem>
+          <ListItem>Wishlist</ListItem>
+          <ListItem>Terms</ListItem>
+        </List>
+      </Center>
+      <Right>
+        <Title>Contact</Title>
+        <ContactItem>
+          <Room /> 999 West Broadway, Vancouver, BC
+        </ContactItem>
+        <ContactItem>
+          <Phone /> +1 604 123 4567
+        </ContactItem>
+        <ContactItem>
+          <MailOutline /> info@efashion.com
+        </ContactItem>
+      </Right>
     </Container>
   );
 };
