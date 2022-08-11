@@ -38,6 +38,7 @@ const SocialIcon = styled.h1`
   align-items: center;
   justify-content: center;
   margin-right: 20px;
+  cursor: pointer;
 `;
 
 const Center = styled.div`
@@ -60,11 +61,22 @@ const List = styled.ul`
 const ListItem = styled.li`
   width: 50%;
   margin-bottom: 10px;
+  cursor: pointer;
 `;
 
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+`;
+
+const ContactItem = styled.div`
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+`;
+
+const Payment = styled.img`
+  width: 50%;
 `;
 
 const Footer: FC = () => {
@@ -108,14 +120,16 @@ const Footer: FC = () => {
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room /> 999 West Broadway, Vancouver, BC
+          <Room style={{ marginRight: "10px" }} /> 999 West Broadway, Vancouver,
+          BC V5Z 1K5 Canada
         </ContactItem>
         <ContactItem>
-          <Phone /> +1 604 123 4567
+          <Phone style={{ marginRight: "10px" }} /> +1 604 123 4567
         </ContactItem>
         <ContactItem>
-          <MailOutline /> info@efashion.com
+          <MailOutline style={{ marginRight: "10px" }} /> info@efashion.com
         </ContactItem>
+        <Payment src="https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/payment.png?raw=true" />
       </Right>
     </Container>
   );
