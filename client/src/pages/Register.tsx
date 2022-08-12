@@ -10,6 +10,7 @@ const Container = styled.div`
     ),
     url(https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/register.jpeg?raw=true)
       center;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;

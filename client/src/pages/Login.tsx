@@ -8,15 +8,16 @@ const Container = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url(https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1080&w=1920)
+    url(https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/login.jpeg?raw=true)
       center;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const Wrapper = styled.div`
-  width: 40%;
+  width: 25%;
   padding: 20px;
   background-color: white;
 `;
@@ -28,13 +29,13 @@ const Title = styled.h1`
 
 const Form = styled.form`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 `;
 
 const Input = styled.input`
   flex: 1;
   min-width: 40%;
-  margin: 20px 10px 0 0;
+  margin: 10px 0;
   padding: 10px;
 `;
 
@@ -45,9 +46,15 @@ const Button = styled.button`
   background-color: rgb(10, 186, 181);
   color: white;
   cursor: pointer;
+  margin-bottom: 10px;
 `;
 
-const Link = styled.div``;
+const Link = styled.a`
+  margin: 5px 0;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+`;
 
 const Login: FC = () => {
   return (
