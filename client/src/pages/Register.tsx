@@ -8,15 +8,49 @@ const Container = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url(https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr-2&h=1080&w=1920)
+    url(https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/register.jpeg?raw=true)
       center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
-const Wrapper = styled.div``;
-const Title = styled.h1``;
-const Form = styled.form``;
-const Input = styled.input``;
-const Agreement = styled.span``;
-const Button = styled.button``;
+
+const Wrapper = styled.div`
+  width: 40%;
+  padding: 20px;
+  background-color: white;
+`;
+
+const Title = styled.h1`
+  font-size: 24px;
+  font-weight: 300;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const Input = styled.input`
+  flex: 1;
+  min-width: 40%;
+  margin: 20px 10px 0 0;
+  padding: 10px;
+`;
+
+const Agreement = styled.span`
+  font-size: 12px;
+  margin: 20px 0;
+`;
+
+const Button = styled.button`
+  width: 40%;
+  border: none;
+  padding: 15px 20px;
+  background-color: rgb(10, 186, 181);
+  color: white;
+  cursor: pointer;
+`;
 
 const Register: FC = () => {
   return (
