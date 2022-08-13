@@ -65,6 +65,7 @@ const ProductDetails = styled.div`
 
 const Image = styled.img`
   width: 200px;
+  cursor: pointer;
 `;
 
 const Description = styled.div`
@@ -114,6 +115,39 @@ const Hr = styled.hr`
 
 const Summary = styled.div`
   flex: 1;
+  border: 0.5px solid lightgray;
+  border-radius: 10px;
+  padding: 20px;
+  height: 50vh;
+`;
+
+const SummaryTitle = styled.h1`
+  font-weight: 200;
+`;
+
+interface SummaryItemProps {
+  total?: boolean;
+}
+
+const SummaryItem = styled.div<SummaryItemProps>`
+  margin: 25px 0px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: ${(props) => props.total && "500"};
+  font-size: ${(props) => props.total && "24px"};
+`;
+
+const SummaryItemText = styled.span``;
+
+const SummaryItemPrice = styled.span``;
+
+const Button = styled.button`
+  width: 100%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
 `;
 
 const Cart: FC = () => {
@@ -151,9 +185,9 @@ const Cart: FC = () => {
               </ProductDetails>
               <PriceDetails>
                 <ProductAmountContainer>
-                  <Remove />
-                  <ProductAmount>2</ProductAmount>
-                  <Add />
+                  <Remove style={{ cursor: "pointer" }} />
+                  <ProductAmount>1</ProductAmount>
+                  <Add style={{ cursor: "pointer" }} />
                 </ProductAmountContainer>
                 <ProductPrice>$79.99</ProductPrice>
               </PriceDetails>
@@ -161,7 +195,7 @@ const Cart: FC = () => {
             <Hr />
             <Product>
               <ProductDetails>
-                <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
+                <Image src="https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/t-shirt.png?raw=true" />
                 <Description>
                   <ProductName>
                     <b>Product:</b> HAKURA T-SHIRT
@@ -177,15 +211,42 @@ const Cart: FC = () => {
               </ProductDetails>
               <PriceDetails>
                 <ProductAmountContainer>
-                  <Remove />
+                  <Remove style={{ cursor: "pointer" }} />
                   <ProductAmount>1</ProductAmount>
-                  <Add />
+                  <Add style={{ cursor: "pointer" }} />
                 </ProductAmountContainer>
                 <ProductPrice>$ 29.99</ProductPrice>
               </PriceDetails>
             </Product>
           </Info>
-          <Summary>Summary</Summary>
+          <Summary>
+            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+            <SummaryItem>
+              <SummaryItemText>Subtotal</SummaryItemText>
+              <SummaryItemPrice>$ 109.98</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem>
+              <SummaryItemText>GST</SummaryItemText>
+              <SummaryItemPrice>$ 5.50</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem>
+              <SummaryItemText>PST</SummaryItemText>
+              <SummaryItemPrice>$ 7.70</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem>
+              <SummaryItemText>Estimated Shipping</SummaryItemText>
+              <SummaryItemPrice>$ 21.00</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem>
+              <SummaryItemText>Shipping Discount</SummaryItemText>
+              <SummaryItemPrice>-$ 21.00</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem total={true}>
+              <SummaryItemText>Total</SummaryItemText>
+              <SummaryItemPrice>$ 123.18</SummaryItemPrice>
+            </SummaryItem>
+            <Button>CHECKOUT NOW</Button>
+          </Summary>
         </Bottom>
       </Wrapper>
       <Footer />
