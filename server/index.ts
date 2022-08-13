@@ -6,10 +6,8 @@ import mongoose from "mongoose";
 import userRouter from "./src/routes/userRoutes";
 import authRouter from "./src/routes/authRoutes";
 
-const url = process.env.DB_URL as string;
-
 mongoose
-  .connect(url)
+  .connect(process.env.DB_URL as string)
   .then((response: any) => console.log("DB connection successful"))
   .catch((error: any) => console.error(error));
 
