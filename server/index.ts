@@ -3,6 +3,7 @@ dotenv.config();
 import express, { Request, Response } from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
+import userRouter from "./routes/userRoutes";
 
 const url = process.env.DB_URL as string;
 
@@ -21,6 +22,9 @@ app.get("/", (req: Request, res: Response) => {
   console.log("received home page request");
   res.send("Hello");
 });
+
+// routers
+app.use("/user", userRouter());
 
 app.listen(process.env.PORT || 9999, () => {
   console.log(`Server listening on port ${process.env.PORT}`);
