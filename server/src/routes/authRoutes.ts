@@ -1,12 +1,11 @@
 // Registration route goes here
 import express, { Request, Response, IRouter } from "express";
-import { ISession } from "../helpers/interfaces";
 import User from "../models/User";
 
 const router = express.Router();
 
 const authRouter = (): IRouter => {
-  router.post("/register", async (req: Request<ISession>, res: Response) => {
+  router.post("/register", async (req: Request, res: Response) => {
     const newUser = new User({
       username: req.body.username,
       email: req.body.email,
