@@ -1,6 +1,6 @@
 // Registration route goes here
 import express, { Request, Response, IRouter } from "express";
-import { ISession } from "../interfaces";
+import { ISession } from "../helpers/interfaces";
 import User from "../models/User";
 
 const router = express.Router();
