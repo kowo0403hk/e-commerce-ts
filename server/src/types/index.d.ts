@@ -1,11 +1,10 @@
+import { UserDocument } from "../models/User";
 export {};
 
 declare global {
   namespace Express {
     interface Request {
-      session: {
-        userID: number;
-      };
+      user: UserDocument;
     }
   }
 }

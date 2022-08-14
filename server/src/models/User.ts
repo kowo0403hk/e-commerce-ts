@@ -7,6 +7,7 @@ export interface UserDocument extends mongoose.Document {
   isAdmin?: boolean;
   createAt?: Date;
   updateAt?: Date;
+  id?: string;
   _id?: mongoose.Types.ObjectId;
   _doc?: any; //mongodb always stores all the values in _doc property
 }
