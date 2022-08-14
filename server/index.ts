@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-import express, { Request, Response } from "express";
+import express from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import userRouter from "./src/routes/userRoutes";
@@ -9,18 +9,13 @@ import authRouter from "./src/routes/authRoutes";
 mongoose
   .connect(process.env.DB_URL as string)
   .then(() => console.log("DB connection successful"))
-  .catch((error: any) => console.error(error));
+  .catch((error) => console.error(error));
 
 const app = express();
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-app.get("/", (req: Request, res: Response) => {
-  console.log("received home page request");
-  res.send("Hello");
-});
 
 // routers
 app.use("/api/user", userRouter());
