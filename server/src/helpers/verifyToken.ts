@@ -1,7 +1,13 @@
+// need the below import of types to extend the Request interface
+import * as types from "../types/index";
 import jwt from "jsonwebtoken";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
-export const verifyToken = (req: Request, res: Response, next: Function) => {
+export const verifyToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const authHeader = req.headers.token as string;
 
   if (authHeader) {
@@ -20,14 +26,23 @@ export const verifyToken = (req: Request, res: Response, next: Function) => {
   }
 };
 
+// user authentication middleware
 export const isAuthenticated = (
   req: Request,
   res: Response,
-  next: Function
+  next: NextFunction
 ) => {
   verifyToken(req, res, () => {
     if (req.user.id === req.params.id || req.user.isAdmin) {
       console.log(req.user);
+      next();
+    } else return res.status(403).json("You are not authenticated");
+  });
+};
+
+export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
+  verifyToken(req, res, () => {
+    if (req.user.isAdmin) {
       next();
     } else return res.status(403).json("You are not authenticated");
   });

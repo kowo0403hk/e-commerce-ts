@@ -8,7 +8,7 @@ import authRouter from "./src/routes/authRoutes";
 
 mongoose
   .connect(process.env.DB_URL as string)
-  .then((response: any) => console.log("DB connection successful"))
+  .then(() => console.log("DB connection successful"))
   .catch((error: any) => console.error(error));
 
 const app = express();
