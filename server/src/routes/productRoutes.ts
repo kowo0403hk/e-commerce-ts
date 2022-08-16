@@ -1,3 +1,4 @@
+import { info } from "console";
 import express, { Request, Response, IRouter } from "express";
 import { isAuthenticated, isAdmin } from "../helpers/verifyToken"; //middleware doing the user authentication work
 import Product, { ProductDocument } from "../models/Product";
@@ -87,14 +88,21 @@ const productRouter = (): IRouter => {
     }
   });
 
-  // Get all users
-  router.get("/", isAdmin, async (req: Request, res: Response) => {
+  // Get all products
+  router.get("/", async (req: Request, res: Response) => {
     const query = req.query.new;
+    const byCategory = req.query.category;
 
     try {
-      const products: ProductDocument[] = query
-        ? await Product.find().sort({ _id: -1 }).limit(5)
-        : await Product.find();
+      let products: ProductDocument[] | undefined;
+
+      if (query)
+        products = await Product.find().sort({ createdAt: -1 }).limit(5);
+
+      if (byCategory)
+        products = await Product.find({ categories: { $in: [byCategory] } });
+
+      if (!query && !byCategory) products = await Product.find();
 
       res.status(200).json(products);
     } catch (err) {

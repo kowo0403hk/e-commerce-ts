@@ -4,10 +4,10 @@ export interface ProductDocument extends mongoose.Document {
   title: string;
   desc: string;
   img: string;
-  categories: string[];
-  size: string;
-  color: string;
-  price: number;
+  categories?: string[] | null;
+  size?: string | undefined;
+  color?: string;
+  price?: number;
   createAt?: Date;
   updateAt?: Date;
   id?: string;
