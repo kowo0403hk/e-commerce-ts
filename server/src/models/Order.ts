@@ -1,5 +1,18 @@
 import mongoose from "mongoose";
 
+interface OrderProduct {
+  productId: string;
+  quantity: number;
+}
+
+export interface OrderDocument extends mongoose.Document {
+  userId: string;
+  products?: OrderProduct[];
+  amount: number;
+  address: Object;
+  status?: string;
+}
+
 const OrderSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true },

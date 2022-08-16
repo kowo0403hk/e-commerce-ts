@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import userRouter from "./src/routes/userRoutes";
 import authRouter from "./src/routes/authRoutes";
 import productRouter from "./src/routes/productRoutes";
+import orderRouter from "./src/routes/orderRoutes";
 
 mongoose
   .connect(process.env.DB_URL as string)
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use("/api/users", userRouter());
 app.use("/api/auth", authRouter());
 app.use("/api/products", productRouter());
+app.use("/api/orders", orderRouter());
 
 app.listen(process.env.PORT || 9999, () => {
   console.log(`Server listening on port ${process.env.PORT}`);
