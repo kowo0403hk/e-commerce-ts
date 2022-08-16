@@ -1,6 +1,5 @@
-import { info } from "console";
 import express, { Request, Response, IRouter } from "express";
-import { isAuthenticated, isAdmin } from "../helpers/verifyToken"; //middleware doing the user authentication work
+import { isAdmin } from "../helpers/verifyToken"; //middleware doing the user authentication work
 import Product, { ProductDocument } from "../models/Product";
 
 const router = express.Router();
@@ -44,38 +43,7 @@ const productRouter = (): IRouter => {
     }
   });
 
-  // Get prod stats
-  router.get("/stats", isAdmin, async (req: Request, res: Response) => {
-    const date = new Date();
-    const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
-
-    try {
-      const data = await Product.aggregate([
-        {
-          $match: {
-            createdAt: { $gte: lastYear },
-          },
-        },
-        {
-          $project: {
-            month: { $month: "$createdAt" },
-          },
-        },
-        {
-          $group: {
-            _id: "$month",
-            total: { $sum: 1 },
-          },
-        },
-      ]);
-
-      res.status(200).json(data);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
-
-  // Get user
+  // Get product
   router.get("/find/:id", async (req: Request, res: Response) => {
     try {
       const product: ProductDocument | null = await Product.findById(
