@@ -5,7 +5,7 @@ import Cart, { CartDocument } from "../models/Cart";
 const router = express.Router();
 
 const productRouter = (): IRouter => {
-  // Create a new product by Admin
+  // Create a new cart
   router.post("/", verifyToken, async (req: Request, res: Response) => {
     const newCart = new Cart(req.body);
 
@@ -17,59 +17,55 @@ const productRouter = (): IRouter => {
     }
   });
 
-  // Update product info
-  router.put("/:id", isAdmin, async (req: Request, res: Response) => {
+  // Update cart
+  router.put("/:id", isAuthenticated, async (req: Request, res: Response) => {
     try {
-      const updatedProduct = await Cart.findByIdAndUpdate(
+      const updatedCart = await Cart.findByIdAndUpdate(
         req.params.id,
         {
           $set: req.body,
         },
         { new: true }
       );
-      res.status(200).json(updatedProduct);
+      res.status(200).json(updatedCart);
     } catch (err) {
       res.status(500).json(err);
     }
   });
 
-  // Delete prodcut
-  router.delete("/:id", isAdmin, async (req: Request, res: Response) => {
-    try {
-      await Cart.findByIdAndDelete(req.params.id);
-      res.status(200).json("Product has been deleted.");
-    } catch (err) {
-      res.status(500).json(err);
+  // Delete cart
+  router.delete(
+    "/:id",
+    isAuthenticated,
+    async (req: Request, res: Response) => {
+      try {
+        await Cart.findByIdAndDelete(req.params.id);
+        res.status(200).json("Cart has been emptied.");
+      } catch (err) {
+        res.status(500).json(err);
+      }
     }
-  });
+  );
 
-  // Get product
+  // Get user cart by userID
   router.get("/find/:id", async (req: Request, res: Response) => {
     try {
-      const product: CartDocument | null = await Cart.findById(req.params.id);
+      const cart: CartDocument | null = await Cart.findOne({
+        userId: req.params.userId,
+      });
 
-      res.status(200).json(product);
+      res.status(200).json(cart);
     } catch (err) {
       res.status(500).json(err);
     }
   });
 
-  // Get all products
-  router.get("/", async (req: Request, res: Response) => {
-    const query = req.query.new;
-    const byCategory = req.query.category;
-
+  // Get all cart of all users
+  router.get("/", isAdmin, async (req: Request, res: Response) => {
     try {
-      let products: CartDocument[] | undefined;
+      const carts: CartDocument[] = await Cart.find();
 
-      if (query) products = await Cart.find().sort({ createdAt: -1 }).limit(5);
-
-      if (byCategory)
-        products = await Cart.find({ categories: { $in: [byCategory] } });
-
-      if (!query && !byCategory) products = await Cart.find();
-
-      res.status(200).json(products);
+      res.status(200).json(carts);
     } catch (err) {
       res.status(500).json(err);
     }
