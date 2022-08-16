@@ -1,5 +1,20 @@
 import mongoose from "mongoose";
 
+export interface ProductDocument extends mongoose.Document {
+  title: string;
+  desc: string;
+  img: string;
+  categories: string[];
+  size: string;
+  color: string;
+  price: number;
+  createAt?: Date;
+  updateAt?: Date;
+  id?: string;
+  _id?: mongoose.Types.ObjectId;
+  _doc?: any; //mongodb always stores all the values in _doc property
+}
+
 const ProductSchema = new mongoose.Schema(
   {
     title: { type: String, required: true, unique: true },
@@ -8,7 +23,7 @@ const ProductSchema = new mongoose.Schema(
     categories: { type: Array },
     size: { type: String },
     color: { type: String },
-    price: { type: String, required: true },
+    price: { type: Number, required: true },
   },
   { timestamps: true }
 );
