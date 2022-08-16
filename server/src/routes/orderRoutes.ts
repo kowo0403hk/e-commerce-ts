@@ -4,7 +4,7 @@ import Order, { OrderDocument } from "../models/Order";
 
 const router = express.Router();
 
-const productRouter = (): IRouter => {
+const orderRouter = (): IRouter => {
   // Create a new order
   router.post("/", verifyToken, async (req: Request, res: Response) => {
     const newOrder = new Order(req.body);
@@ -105,4 +105,4 @@ const productRouter = (): IRouter => {
   return router;
 };
 
-export default productRouter;
+export default orderRouter;

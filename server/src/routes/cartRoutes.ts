@@ -4,7 +4,7 @@ import Cart, { CartDocument } from "../models/Cart";
 
 const router = express.Router();
 
-const productRouter = (): IRouter => {
+const cartRouter = (): IRouter => {
   // Create a new cart
   router.post("/", verifyToken, async (req: Request, res: Response) => {
     const newCart = new Cart(req.body);
@@ -74,4 +74,4 @@ const productRouter = (): IRouter => {
   return router;
 };
 
-export default productRouter;
+export default cartRouter;

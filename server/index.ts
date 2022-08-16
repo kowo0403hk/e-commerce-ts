@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import userRouter from "./src/routes/userRoutes";
 import authRouter from "./src/routes/authRoutes";
 import productRouter from "./src/routes/productRoutes";
+import cartRouter from "./src/routes/cartRoutes";
 import orderRouter from "./src/routes/orderRoutes";
 
 mongoose
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use("/api/users", userRouter());
 app.use("/api/auth", authRouter());
 app.use("/api/products", productRouter());
+app.use("/api/carts", cartRouter());
 app.use("/api/orders", orderRouter());
 
 app.listen(process.env.PORT || 9999, () => {
