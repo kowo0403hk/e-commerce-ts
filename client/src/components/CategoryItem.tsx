@@ -1,6 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   flex: 1;
@@ -50,6 +51,7 @@ interface ItemProps {
   id: number;
   img: string;
   title: string;
+  cat: string;
 }
 
 interface CategoryItemProps {
@@ -59,11 +61,13 @@ interface CategoryItemProps {
 const CategoryItem: FC<CategoryItemProps> = ({ item }) => {
   return (
     <Container>
-      <Image src={item.img} />
-      <Info>
-        <Title>{item.title}</Title>
-        <Button>SHOP NOW</Button>
-      </Info>
+      <Link to={`/products/${item.cat}`}>
+        <Image src={item.img} />
+        <Info>
+          <Title>{item.title}</Title>
+          <Button>SHOP NOW</Button>
+        </Info>
+      </Link>
     </Container>
   );
 };

@@ -14,7 +14,6 @@ const Home: FC = () => {
       <Navbar />
       <Slider />
       <Categories />
-      <Products />
       <NewsLetter />
       <Footer />
     </div>

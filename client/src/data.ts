@@ -27,16 +27,19 @@ export const categories = [
     id: 1,
     img: "https://raw.githubusercontent.com/kowo0403hk/e-commerce-ts/main/client/docs/Categories1.webp",
     title: "SHIRT STYLE!",
+    cat: "women",
   },
   {
     id: 2,
     img: "https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/Categories2.jpeg?raw=true",
     title: "LOUNGEWEAR LOVE",
+    cat: "coat",
   },
   {
     id: 3,
     img: "https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/Categories3.jpeg?raw=true",
     title: "LIGHT JACKETS",
+    cat: "jeans",
   },
 ];
 

@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -37,7 +38,34 @@ const Select = styled.select`
 
 const Option = styled.option``;
 
+interface IFilters {
+  color?: string;
+  size?: string;
+}
+
 const ProductList: FC = () => {
+  const location = useLocation();
+
+  const cat = location.pathname.split("/")[2];
+
+  const [filters, setFilters] = useState<IFilters>({});
+
+  const [sort, setSort] = useState("Newest");
+
+  const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    const value = e.target.value;
+
+    value.includes("All")
+      ? setFilters({ ...filters, [e.target.name]: "" })
+      : setFilters({
+          ...filters,
+          [e.target.name]: value,
+        });
+  };
+
+  const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) =>
+    setSort(e.target.value);
+
   return (
     <Container>
       <Announcement />
@@ -47,10 +75,9 @@ const ProductList: FC = () => {
         <Filter>
           <FilterText>
             Filter Products:
-            <Select>
-              <Option disabled selected>
-                Color
-              </Option>
+            <Select name="color" onChange={handleFilter}>
+              <Option disabled>Colors</Option>
+              <Option>All Colors</Option>
               <Option>White</Option>
               <Option>Black</Option>
               <Option>Red</Option>
@@ -58,7 +85,9 @@ const ProductList: FC = () => {
               <Option>Yellow</Option>
               <Option>Green</Option>
             </Select>
-            <Select>
+            <Select name="size" onChange={handleFilter}>
+              <Option disabled>Sizes</Option>
+              <Option>All Sizes</Option>
               <Option>XS</Option>
               <Option>S</Option>
               <Option>M</Option>
@@ -70,15 +99,15 @@ const ProductList: FC = () => {
         <Filter>
           <FilterText>
             Sort Products:
-            <Select>
-              <Option selected>Newest</Option>
-              <Option>Price - Ascending</Option>
-              <Option>Price - Descending</Option>
+            <Select onChange={handleSort}>
+              <Option value="newest">Newest</Option>
+              <Option value="asc">Price - Ascending</Option>
+              <Option value="desc">Price - Descending</Option>
             </Select>
           </FilterText>
         </Filter>
       </FilterContainer>
-      <Products />
+      <Products cat={cat} filters={filters} sort={sort} />
       <NewsLetter />
       <Footer />
     </Container>

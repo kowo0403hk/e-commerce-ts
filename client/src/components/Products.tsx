@@ -1,7 +1,8 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { popularProducts } from "../data";
 import Product from "./Product";
+import axios from "axios";
 
 const Container = styled.div`
   padding: 20px;
@@ -10,7 +11,23 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-const Products: FC = () => {
+interface IFilters {
+  color?: string;
+  size?: string;
+}
+
+interface ProductsProps {
+  cat: string;
+  filters: IFilters;
+  sort: string;
+}
+
+const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {}, [cat]);
+
   const mappedProducts = popularProducts.map((item) => {
     return <Product item={item} key={item.id} />;
   });
