@@ -73,7 +73,7 @@ const Icon = styled.div`
 
 interface IProductIndividual {
   item: {
-    id: number;
+    _id: number;
     title: string;
     desc: string;
     img: string;
@@ -88,6 +88,7 @@ interface IProductIndividual {
 }
 
 const Product: FC<IProductIndividual> = ({ item }: IProductIndividual) => {
+  console.log(item);
   return (
     <Container>
       <Circle />
@@ -97,7 +98,7 @@ const Product: FC<IProductIndividual> = ({ item }: IProductIndividual) => {
           <ShoppingCartOutlined />
         </Icon>
         <Icon>
-          <Link to={`/product/${item.id}`}>
+          <Link to={`/product/${item._id}`}>
             <SearchOutlined />
           </Link>
         </Icon>

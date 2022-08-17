@@ -24,7 +24,7 @@ const ImgContainer = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 90vh;
-  object-fit: cover;
+  object-fit: contain;
   ${mobile({ height: "40vh" })}
 `;
 
@@ -119,7 +119,7 @@ const Button = styled.button`
 `;
 
 interface IProductIndividual {
-  id?: number;
+  _id?: number;
   title?: string;
   desc?: string;
   img?: string;
@@ -182,12 +182,12 @@ const Product: FC = () => {
       <Navbar />
       <Wrapper>
         <ImgContainer>
-          <Image src={product.img} />
+          <Image src={product?.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>{product.title}</Title>
-          <Description>{product.desc}</Description>
-          <Price>{product.price}</Price>
+          <Title>{product?.title}</Title>
+          <Description>{product?.desc}</Description>
+          <Price>${(product!.price! / 100).toFixed(2)}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>

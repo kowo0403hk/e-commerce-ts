@@ -22,7 +22,7 @@ interface ProductsProps {
 }
 
 interface IProduct {
-  id: number;
+  _id: number;
   title: string;
   desc: string;
   img: string;
@@ -89,7 +89,7 @@ const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
   }, [sort]);
 
   const mappedProducts = filteredProducts.map((item: IProduct) => {
-    return <Product item={item} key={item.id} />;
+    return <Product item={item} key={item._id} />;
   });
 
   return <Container>{mappedProducts}</Container>;
