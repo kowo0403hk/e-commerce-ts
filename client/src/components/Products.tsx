@@ -22,13 +22,52 @@ interface ProductsProps {
   sort: string;
 }
 
+interface IProducts {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+  categories?: string[] | null;
+  size?: string[];
+  color?: string[];
+  price?: number;
+  inStock?: boolean;
+  createAt?: Date;
+  updateAt?: Date;
+}
+
 const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [products, setProducts] = useState<IProducts[] | []>([]);
+  const [filteredProducts, setFilteredProducts] = useState<IProducts[] | []>(
+    []
+  );
 
-  useEffect(() => {}, [cat]);
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await axios.get(
+          cat
+            ? `http://localhost:8080/api/products?category=${cat}`
+            : "http://localhost:8080/api/products/"
+        );
+        setProducts(res.data);
+      } catch (err) {}
+    };
+    getProducts();
+  }, [cat]);
 
-  const mappedProducts = popularProducts.map((item) => {
+  useEffect(() => {
+    cat &&
+      setFilteredProducts(
+        products.filter((item: any) =>
+          Object.entries(filters).every(([key, value]) =>
+            item[key].includes(value)
+          )
+        )
+      );
+  }, [products, cat, filters]);
+
+  const mappedProducts = filteredProducts.map((item: IProducts) => {
     return <Product item={item} key={item.id} />;
   });
 

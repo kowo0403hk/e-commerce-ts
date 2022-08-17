@@ -70,14 +70,23 @@ const Icon = styled.div`
   }
 `;
 
-interface ProductProps {
+interface IProductIndividual {
   item: {
     id: number;
+    title: string;
+    desc: string;
     img: string;
+    categories?: string[] | null;
+    size?: string[];
+    color?: string[];
+    price?: number;
+    inStock?: boolean;
+    createAt?: Date;
+    updateAt?: Date;
   };
 }
 
-const Product: FC<ProductProps> = ({ item }: ProductProps) => {
+const Product: FC<IProductIndividual> = ({ item }: IProductIndividual) => {
   return (
     <Container>
       <Circle />
