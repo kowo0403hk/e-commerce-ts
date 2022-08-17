@@ -168,8 +168,8 @@ const Product: FC = () => {
 
   const handleQuantity = (command: string) => {
     command === "minus"
-      ? quantity > 1 && setQuantity((prev) => prev--)
-      : setQuantity((prev) => prev++);
+      ? quantity > 1 && setQuantity((prev) => (prev -= 1))
+      : setQuantity((prev) => (prev += 1));
   };
 
   const handleClick = () => {
