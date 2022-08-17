@@ -8,6 +8,7 @@ import authRouter from "./src/routes/authRoutes";
 import productRouter from "./src/routes/productRoutes";
 import cartRouter from "./src/routes/cartRoutes";
 import orderRouter from "./src/routes/orderRoutes";
+import paymentRouter from "./src/routes/paymentRouter";
 
 mongoose
   .connect(process.env.DB_URL as string)
@@ -26,6 +27,7 @@ app.use("/api/auth", authRouter());
 app.use("/api/products", productRouter());
 app.use("/api/carts", cartRouter());
 app.use("/api/orders", orderRouter());
+app.use("/api/payments", paymentRouter());
 
 app.listen(process.env.PORT || 9999, () => {
   console.log(`Server listening on port ${process.env.PORT}`);
