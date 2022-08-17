@@ -5,9 +5,10 @@ export interface ProductDocument extends mongoose.Document {
   desc: string;
   img: string;
   categories?: string[] | null;
-  size?: string | undefined;
-  color?: string;
+  size?: string[];
+  color?: string[];
   price?: number;
+  inStock?: boolean;
   createAt?: Date;
   updateAt?: Date;
 }
@@ -18,9 +19,10 @@ const ProductSchema = new mongoose.Schema(
     desc: { type: String, required: true },
     img: { type: String, required: true },
     categories: { type: Array },
-    size: { type: String },
-    color: { type: String },
+    size: { type: Array },
+    color: { type: Array },
     price: { type: Number, required: true },
+    inStock: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
