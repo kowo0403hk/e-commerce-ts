@@ -46,7 +46,9 @@ interface IFilters {
 const ProductList: FC = () => {
   const location = useLocation();
 
-  const [cat, setCat] = useState(location.pathname.split("/")[2]); //Pearl or Buchi or Stuffy
+  const [cat, setCat] = useState<string | null>(
+    location.pathname.split("/")[2]
+  ); //Pearl or Buchi or Stuffy
 
   const [filters, setFilters] = useState<IFilters>({});
 
@@ -55,11 +57,16 @@ const ProductList: FC = () => {
   const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const value = e.target.value;
 
-    setFilters({
-      ...filters,
-      [e.target.name]: value,
-    });
-    setCat(value);
+    if (value.includes("All")) {
+      setFilters({});
+      setCat(null);
+    } else {
+      setFilters({
+        ...filters,
+        [e.target.name]: value,
+      });
+      setCat(value); // change category and fetch new info
+    }
   };
 
   console.log(filters);
@@ -71,19 +78,21 @@ const ProductList: FC = () => {
     <Container>
       <Announcement />
       <Navbar />
-      <Title>{cat.toUpperCase()}</Title>
+      <Title>{cat ? cat.toUpperCase() : "All Piggies"}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>
             Filter Piggies:
             <Select name="categories" onChange={handleFilter}>
               <Option disabled>Types</Option>
+              <Option>All Types</Option>
               <Option>Pearl</Option>
               <Option>Buchi</Option>
               <Option>Stuffy</Option>
             </Select>
             <Select name="size" onChange={handleFilter}>
               <Option disabled>Sizes</Option>
+              <Option>All Sizes</Option>
               <Option>Mini</Option>
               <Option>Micro</Option>
               <Option>Medium</Option>

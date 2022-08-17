@@ -16,7 +16,7 @@ interface IFilters {
 }
 
 interface ProductsProps {
-  cat: string;
+  cat: string | null;
   filters: IFilters;
   sort: string;
 }
@@ -56,9 +56,9 @@ const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
     getProducts();
   }, [cat]);
 
-  // for filtering products by category and filters(colors and sizes)
+  // for filtering products by category and filters(types and sizes)
   useEffect(() => {
-    cat &&
+    if (cat) {
       setFilteredProducts(
         products.filter((item: any) =>
           Object.entries(filters).every(([key, value]) =>
@@ -66,6 +66,9 @@ const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
           )
         )
       );
+    } else {
+      setFilteredProducts(products);
+    }
   }, [products, cat, filters]);
 
   // for sorting products
