@@ -9,6 +9,7 @@ import productRouter from "./src/routes/productRoutes";
 import cartRouter from "./src/routes/cartRoutes";
 import orderRouter from "./src/routes/orderRoutes";
 import paymentRouter from "./src/routes/paymentRouter";
+import cors from "cors";
 
 mongoose
   .connect(process.env.DB_URL as string)
@@ -17,6 +18,7 @@ mongoose
 
 const app = express();
 
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
