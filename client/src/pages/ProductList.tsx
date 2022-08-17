@@ -74,31 +74,27 @@ const ProductList: FC = () => {
       <FilterContainer>
         <Filter>
           <FilterText>
-            Filter Products:
+            Filter Piggies:
             <Select name="color" onChange={handleFilter}>
-              <Option disabled>Colors</Option>
-              <Option>All Colors</Option>
-              <Option>White</Option>
-              <Option>Black</Option>
-              <Option>Red</Option>
-              <Option>Blue</Option>
-              <Option>Yellow</Option>
-              <Option>Green</Option>
+              <Option disabled>Types</Option>
+              <Option>All Types</Option>
+              <Option>Pearl</Option>
+              <Option>Buchi</Option>
+              <Option>Stuffy</Option>
             </Select>
             <Select name="size" onChange={handleFilter}>
               <Option disabled>Sizes</Option>
               <Option>All Sizes</Option>
-              <Option>XS</Option>
-              <Option>S</Option>
-              <Option>M</Option>
-              <Option>L</Option>
-              <Option>XL</Option>
+              <Option>Mini</Option>
+              <Option>Micro</Option>
+              <Option>Medium</Option>
+              <Option>One Size</Option>
             </Select>
           </FilterText>
         </Filter>
         <Filter>
           <FilterText>
-            Sort Products:
+            Sort Piggies:
             <Select onChange={handleSort}>
               <Option value="newest">Newest</Option>
               <Option value="asc">Price - Ascending</Option>
