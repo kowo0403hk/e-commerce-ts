@@ -27,19 +27,19 @@ export const categories = [
     id: 1,
     img: "https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/Categories1.jpeg?raw=true",
     title: "PINK FEVER",
-    cat: "pearl",
+    cat: "Pearl",
   },
   {
     id: 2,
     img: "https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/Categories2.jpg?raw=true",
     title: "SPOTTED LOVE",
-    cat: "buchi",
+    cat: "Buchi",
   },
   {
     id: 3,
     img: "https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/Categories3.jpg?raw=true",
     title: "JUST STUFFY!",
-    cat: "stuffy",
+    cat: "Stuffy",
   },
 ];
 

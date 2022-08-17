@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 interface IFilters {
-  color?: string;
+  categories?: string;
   size?: string;
 }
 
@@ -21,7 +21,7 @@ interface ProductsProps {
   sort: string;
 }
 
-interface IProducts {
+interface IProduct {
   id: number;
   title: string;
   desc: string;
@@ -36,10 +36,8 @@ interface IProducts {
 }
 
 const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
-  const [products, setProducts] = useState<IProducts[] | []>([]);
-  const [filteredProducts, setFilteredProducts] = useState<IProducts[] | []>(
-    []
-  );
+  const [products, setProducts] = useState<IProduct[] | []>([]);
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[] | []>([]);
 
   // for getting all products
   useEffect(() => {
@@ -87,7 +85,7 @@ const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
     }
   }, [sort]);
 
-  const mappedProducts = filteredProducts.map((item: IProducts) => {
+  const mappedProducts = filteredProducts.map((item: IProduct) => {
     return <Product item={item} key={item.id} />;
   });
 

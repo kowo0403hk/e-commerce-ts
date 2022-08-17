@@ -39,14 +39,14 @@ const Select = styled.select`
 const Option = styled.option``;
 
 interface IFilters {
-  color?: string;
+  categories?: string;
   size?: string;
 }
 
 const ProductList: FC = () => {
   const location = useLocation();
 
-  const cat = location.pathname.split("/")[2];
+  const [cat, setCat] = useState(location.pathname.split("/")[2]); //Pearl or Buchi or Stuffy
 
   const [filters, setFilters] = useState<IFilters>({});
 
@@ -55,13 +55,14 @@ const ProductList: FC = () => {
   const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const value = e.target.value;
 
-    value.includes("All")
-      ? setFilters({ ...filters, [e.target.name]: "" })
-      : setFilters({
-          ...filters,
-          [e.target.name]: value,
-        });
+    setFilters({
+      ...filters,
+      [e.target.name]: value,
+    });
+    setCat(value);
   };
+
+  console.log(filters);
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) =>
     setSort(e.target.value);
@@ -75,16 +76,14 @@ const ProductList: FC = () => {
         <Filter>
           <FilterText>
             Filter Piggies:
-            <Select name="color" onChange={handleFilter}>
+            <Select name="categories" onChange={handleFilter}>
               <Option disabled>Types</Option>
-              <Option>All Types</Option>
               <Option>Pearl</Option>
               <Option>Buchi</Option>
               <Option>Stuffy</Option>
             </Select>
             <Select name="size" onChange={handleFilter}>
               <Option disabled>Sizes</Option>
-              <Option>All Sizes</Option>
               <Option>Mini</Option>
               <Option>Micro</Option>
               <Option>Medium</Option>
