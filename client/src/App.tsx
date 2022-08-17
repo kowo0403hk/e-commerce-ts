@@ -5,9 +5,12 @@ import Cart from "./pages/Cart";
 // import Product from "./pages/Product";
 // import ProductList from "./pages/ProductList";
 // import Home from "./pages/Home";
+import Pay from "./components/Pay";
+import dotenv from "dotenv";
+dotenv.config({ path: "../.env" });
 
 const App: FC = () => {
-  return <Cart />;
+  return <Pay />;
 };
 
 export default App;
