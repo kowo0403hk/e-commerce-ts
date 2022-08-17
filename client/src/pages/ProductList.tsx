@@ -65,7 +65,9 @@ const ProductList: FC = () => {
         ...filters,
         [e.target.name]: value,
       });
-      setCat(value); // change category and fetch new info
+      if (e.target.name === "categories") {
+        setCat(value); // change category and fetch new info
+      }
     }
   };
 
