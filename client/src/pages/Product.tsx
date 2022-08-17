@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import NewsLetter from "../components/NewsLetter";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
+import { apiRequest } from "../helpers/requestMethods";
 
 const Container = styled.div``;
 
@@ -117,41 +118,68 @@ const Button = styled.button`
   }
 `;
 
+interface IProductIndividual {
+  id?: number;
+  title?: string;
+  desc?: string;
+  img?: string;
+  categories?: string[] | null;
+  size?: string[];
+  color?: string[];
+  price?: number;
+  inStock?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
 const Product: FC = () => {
   const location = useLocation();
 
   const id = location.pathname.split("/")[2];
+
+  const [product, setProduct] = useState<IProductIndividual>({});
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await apiRequest.get(`/products/find/${id}`);
+        setProduct(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getProduct();
+  }, [id]);
+
+  const mappedColors = product!.color!.map((c: string) => (
+    <FilterColor color={c} key={c} />
+  ));
+
+  const mappedSizes = product!.size!.map((s: string) => (
+    <FilterSizeOption key={s}>{s}</FilterSizeOption>
+  ));
+
   return (
     <Container>
       <Announcement />
       <Navbar />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/jean.jpeg?raw=true" />
+          <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>Denim Jumpsuit</Title>
-          <Description>
-            Designed by local artisan in Tokyo, Japan. Each line of thread on
-            the denim tells a story.
-          </Description>
-          <Price>$39.99</Price>
+          <Title>{product.title}</Title>
+          <Description>{product.desc}</Description>
+          <Price>{product.price}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
+              {mappedColors}
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
-              </FilterSize>
+              <FilterSize>{mappedSizes}</FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
