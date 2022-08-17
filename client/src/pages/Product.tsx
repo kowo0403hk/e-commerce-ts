@@ -139,6 +139,12 @@ const Product: FC = () => {
 
   const [product, setProduct] = useState<IProductIndividual>({});
 
+  const [quantity, setQuantity] = useState(1);
+
+  const [color, setColor] = useState("");
+
+  const [size, setSize] = useState("");
+
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -153,12 +159,18 @@ const Product: FC = () => {
   }, [id]);
 
   const mappedColors = product!.color!.map((c: string) => (
-    <FilterColor color={c} key={c} />
+    <FilterColor color={c} key={c} onClick={() => setColor(c)} />
   ));
 
   const mappedSizes = product!.size!.map((s: string) => (
     <FilterSizeOption key={s}>{s}</FilterSizeOption>
   ));
+
+  const handleQuantity = (command: string) => {
+    command === "minus"
+      ? quantity > 1 && setQuantity((prev) => prev--)
+      : setQuantity((prev) => prev++);
+  };
 
   return (
     <Container>
@@ -179,14 +191,23 @@ const Product: FC = () => {
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>{mappedSizes}</FilterSize>
+              <FilterSize
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                  setSize(e.target.value)
+                }
+              >
+                {mappedSizes}
+              </FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove cursor="pointer" />
-              <Amount>1</Amount>
-              <Add cursor="pointer" />
+              <Remove
+                cursor="pointer"
+                onClick={() => handleQuantity("minus")}
+              />
+              <Amount>{quantity}</Amount>
+              <Add cursor="pointer" onClick={() => handleQuantity("add")} />
             </AmountContainer>
             <Button>Add to Cart</Button>
           </AddContainer>
