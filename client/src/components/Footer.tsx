@@ -87,10 +87,11 @@ const Footer: FC = () => {
   return (
     <Container>
       <Left>
-        <Logo>Fahsion</Logo>
+        <Logo>PigCasso</Logo>
         <Description>
-          This is a e-commerce project built with React and TypeScript. For more
-          information, please visit their official websites.
+          PigCasso is an e-commerce application built with React, TypeScript,
+          Express, and MongoDB. For more information, please visit their
+          official websites.
         </Description>
         <SocialContainer>
           <SocialIcon color="3B5999">
@@ -112,9 +113,9 @@ const Footer: FC = () => {
         <List>
           <ListItem>Home</ListItem>
           <ListItem>Cart</ListItem>
-          <ListItem>Men's Fashion</ListItem>
-          <ListItem>Women's Fashion</ListItem>
-          <ListItem>Accessories</ListItem>
+          <ListItem>Pink Piggies</ListItem>
+          <ListItem>Spotted Piggies</ListItem>
+          <ListItem>Stuffies</ListItem>
           <ListItem>My Account</ListItem>
           <ListItem>Order Tracking</ListItem>
           <ListItem>Wishlist</ListItem>

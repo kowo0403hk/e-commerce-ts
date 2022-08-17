@@ -39,8 +39,8 @@ const Pay: FC = () => {
         <span>Processing...Please wait.</span>
       ) : (
         <StripeCheckout
-          name="Piggy Island"
-          image="#"
+          name="PigCasso"
+          image="https://www.pngitem.com/pimgs/m/57-573594_cute-pig-cartoon-hd-png-download.png"
           billingAddress
           shippingAddress
           description="Your total is $30"

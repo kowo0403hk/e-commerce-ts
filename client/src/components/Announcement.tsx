@@ -13,7 +13,12 @@ const Container = styled.div`
 `;
 
 const Announcement: FC = () => {
-  return <Container>Speical Sale!! Free Shipping on Orders Over $40</Container>;
+  return (
+    <Container>
+      Special Giveaways! New owners will receive a homemade mug with your
+      piggy's picture printed on the body of the mug!
+    </Container>
+  );
 };
 
 export default Announcement;

@@ -40,13 +40,14 @@ const Button = styled.button`
   border: none;
   background-color: rgb(10, 186, 181);
   color: white;
+  cursor: pointer;
 `;
 
 const NewsLetter: FC = () => {
   return (
     <Container>
       <Title>Newsletter</Title>
-      <Description>Get updates from your favorite products!</Description>
+      <Description>Get updates from your favorite pig!</Description>
       <InputContainer>
         <Input placeholder="Your email" />
         <Button>

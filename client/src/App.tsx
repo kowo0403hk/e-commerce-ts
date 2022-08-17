@@ -16,11 +16,14 @@ import dotenv from "dotenv";
 dotenv.config({ path: "../.env" });
 
 const App: FC = () => {
-  const user = true;
+  const user = false;
 
   return (
     <Router>
       <Switch>
+        <Route path="/payments">
+          <Pay />
+        </Route>
         <Route exact path="/">
           <Home />
         </Route>
@@ -35,9 +38,7 @@ const App: FC = () => {
         </Route>
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
         <Route path="/register">
-          <Route path="/login">
-            {user ? <Redirect to="/" /> : <Register />}
-          </Route>
+          {user ? <Redirect to="/" /> : <Register />}
         </Route>
       </Switch>
     </Router>

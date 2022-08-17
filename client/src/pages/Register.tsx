@@ -9,7 +9,7 @@ const Container = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url(https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/register.jpeg?raw=true)
+    url(https://c1.wallpaperflare.com/preview/970/253/127/wild-pigs-little-pig-wildpark-poing-young-animals.jpg)
       center;
   background-size: cover;
   display: flex;

@@ -25,25 +25,25 @@ export const sliderItems = [
 export const categories = [
   {
     id: 1,
-    img: "https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/Categories1.tiff?raw=true",
+    img: "https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/Categories1.jpeg?raw=true",
     title: "PINK FEVER",
     cat: "pearl",
   },
   {
     id: 2,
-    img: "https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/Categories1.tiff?raw=true",
+    img: "https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/Categories2.jpg?raw=true",
     title: "SPOTTED LOVE",
     cat: "buchi",
   },
   {
     id: 3,
-    img: "https://m.media-amazon.com/images/I/61MKzZPH9UL._AC_SL1500_.jpg",
+    img: "https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/Categories3.jpg?raw=true",
     title: "JUST STUFFY!",
     cat: "stuffy",
   },
 ];
 
-export const popularProducts = [
+export const products = [
   {
     id: 1,
     img: "https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/Products1.png?raw=true",
