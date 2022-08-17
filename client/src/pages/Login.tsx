@@ -9,7 +9,7 @@ const Container = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url(https://homesteadgeek.com/wp-content/uploads/2021/06/cute-mini-pigs-with-ribbon-in-red-background-1024x597.jpg)
+    url(https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/login.jpeg?raw=true)
       center;
   background-size: cover;
   display: flex;

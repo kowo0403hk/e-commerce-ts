@@ -40,7 +40,7 @@ const Pay: FC = () => {
       ) : (
         <StripeCheckout
           name="PigCasso"
-          image="https://www.pngitem.com/pimgs/m/57-573594_cute-pig-cartoon-hd-png-download.png"
+          image="https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/logo.png?raw=true"
           billingAddress
           shippingAddress
           description="Your total is $30"
