@@ -1,11 +1,12 @@
+import { FC, useState, useEffect } from "react";
 import { Add, Remove } from "@material-ui/icons";
-import { FC } from "react";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import NewsLetter from "../components/NewsLetter";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -117,6 +118,9 @@ const Button = styled.button`
 `;
 
 const Product: FC = () => {
+  const location = useLocation();
+
+  const id = location.pathname.split("/")[2];
   return (
     <Container>
       <Announcement />

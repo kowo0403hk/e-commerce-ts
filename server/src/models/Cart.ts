@@ -8,6 +8,8 @@ interface CartProduct {
 export interface CartDocument extends mongoose.Document {
   userId: string;
   products?: CartProduct[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 const CartSchema = new mongoose.Schema(

@@ -9,8 +9,8 @@ export interface ProductDocument extends mongoose.Document {
   color?: string[];
   price?: number;
   inStock?: boolean;
-  createAt?: Date;
-  updateAt?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 const ProductSchema = new mongoose.Schema(

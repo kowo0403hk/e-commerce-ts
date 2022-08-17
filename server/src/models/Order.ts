@@ -11,6 +11,8 @@ export interface OrderDocument extends mongoose.Document {
   amount: number;
   address: string;
   status?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 const OrderSchema = new mongoose.Schema(

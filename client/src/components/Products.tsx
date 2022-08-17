@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import styled from "styled-components";
-import { popularProducts } from "../data";
 import Product from "./Product";
 import axios from "axios";
 
@@ -32,8 +31,8 @@ interface IProducts {
   color?: string[];
   price?: number;
   inStock?: boolean;
-  createAt?: Date;
-  updateAt?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
@@ -42,6 +41,7 @@ const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
     []
   );
 
+  // for getting all products
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -51,11 +51,14 @@ const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
             : "http://localhost:8080/api/products/"
         );
         setProducts(res.data);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     };
     getProducts();
   }, [cat]);
 
+  // for filtering products by category and filters(colors and sizes)
   useEffect(() => {
     cat &&
       setFilteredProducts(
@@ -66,6 +69,23 @@ const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
         )
       );
   }, [products, cat, filters]);
+
+  // for sorting products
+  useEffect(() => {
+    if (sort === "newest") {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a: any, b: any) => a.createdAt - b.createdAt)
+      );
+    } else if (sort === "asc") {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a: any, b: any) => a.price - b.price)
+      );
+    } else {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a: any, b: any) => b.price - a.price)
+      );
+    }
+  }, [sort]);
 
   const mappedProducts = filteredProducts.map((item: IProducts) => {
     return <Product item={item} key={item.id} />;

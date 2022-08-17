@@ -5,6 +5,7 @@ import {
   SearchOutlined,
   FavoriteBorderOutlined,
 } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 const Info = styled.div`
   opacity: 0;
@@ -81,8 +82,8 @@ interface IProductIndividual {
     color?: string[];
     price?: number;
     inStock?: boolean;
-    createAt?: Date;
-    updateAt?: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
   };
 }
 
@@ -96,7 +97,9 @@ const Product: FC<IProductIndividual> = ({ item }: IProductIndividual) => {
           <ShoppingCartOutlined />
         </Icon>
         <Icon>
-          <SearchOutlined />
+          <Link to={`/product/${item.id}`}>
+            <SearchOutlined />
+          </Link>
         </Icon>
         <Icon>
           <FavoriteBorderOutlined />
