@@ -60,7 +60,7 @@ const Slide = styled.div<SlideProps>`
 `;
 const ImgContainer = styled.div`
   flex: 1;
-  height: 100%;
+  height: 80%;
 `;
 
 interface ImgProps {
@@ -68,7 +68,7 @@ interface ImgProps {
 }
 
 const Image = styled.img<ImgProps>`
-  height: 80%;
+  height: 100%;
 `;
 
 const InfoContainer = styled.div`

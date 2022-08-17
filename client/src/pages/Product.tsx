@@ -158,11 +158,11 @@ const Product: FC = () => {
     getProduct();
   }, [id]);
 
-  const mappedColors = product!.color!.map((c: string) => (
+  const mappedColors = product?.color?.map((c: string) => (
     <FilterColor color={c} key={c} onClick={() => setColor(c)} />
   ));
 
-  const mappedSizes = product!.size!.map((s: string) => (
+  const mappedSizes = product?.size?.map((s: string) => (
     <FilterSizeOption key={s}>{s}</FilterSizeOption>
   ));
 
@@ -170,6 +170,10 @@ const Product: FC = () => {
     command === "minus"
       ? quantity > 1 && setQuantity((prev) => prev--)
       : setQuantity((prev) => prev++);
+  };
+
+  const handleClick = () => {
+    // update cart
   };
 
   return (
@@ -209,7 +213,7 @@ const Product: FC = () => {
               <Amount>{quantity}</Amount>
               <Add cursor="pointer" onClick={() => handleQuantity("add")} />
             </AmountContainer>
-            <Button>Add to Cart</Button>
+            <Button onClick={handleClick}>Add to Cart</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

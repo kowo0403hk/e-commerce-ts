@@ -79,7 +79,7 @@ const Navbar: FC = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>Fashion</Logo>
+          <Logo>PigCasso</Logo>
         </Center>
         <Right>
           <MenuItem>Register</MenuItem>
