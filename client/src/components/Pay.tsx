@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import StripeCheckout, { Token } from "react-stripe-checkout";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { userRequest } from "../helpers/requestMethods";
 
 const KEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY as string;
 
@@ -43,12 +43,11 @@ const Pay: FC<IPay> = ({ children, cart }: IPay) => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const res = await axios.post("http://localhost:8080/api/payments", {
+        const res = await userRequest.post("/payments", {
           tokenId: stripeToken!.id,
           amount: cart.subtotal * 1.12 * 100,
         });
 
-        console.log(res.data);
         history.push("/success", { data: res.data });
       } catch (err) {
         console.log(err);
