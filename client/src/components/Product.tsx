@@ -98,7 +98,7 @@ const Product: FC<IProductIndividual> = ({ item }: IProductIndividual) => {
           <ShoppingCartOutlined />
         </Icon>
         <Icon>
-          <Link to={`/product/${item._id}`}>
+          <Link to={`/product/${item._id}`} style={{ color: "black" }}>
             <SearchOutlined />
           </Link>
         </Icon>

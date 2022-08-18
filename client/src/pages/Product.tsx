@@ -152,6 +152,7 @@ const Product: FC = () => {
   useEffect(() => {
     const getProduct = async () => {
       try {
+        // setting up product loading and initial selected color and size for redux state management
         const res = await apiRequest.get(`/products/find/${id}`);
         setProduct(res.data);
         setSelectedColor(res.data.color[0]);

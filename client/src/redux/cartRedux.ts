@@ -22,14 +22,14 @@ const cartSlice = createSlice({
   initialState: {
     products: [],
     quantity: 0,
-    total: 0,
+    subtotal: 0,
   },
   reducers: {
     addProduct: (
       state: {
         quantity: number;
         products: ReduxCartProduct[];
-        total: number;
+        subtotal: number;
       },
       action: {
         payload: ReduxCartProduct;
@@ -38,7 +38,7 @@ const cartSlice = createSlice({
       // we can only mutate our state like this in @redux/toolkit but not normal redux
       state.quantity += 1; // product numbers in the cart, not about quantity of per product
       state.products.push(action.payload);
-      state.total += action!.payload!.price! * action.payload.quantity;
+      state.subtotal += action!.payload!.price! * action.payload.quantity;
     },
   },
 });

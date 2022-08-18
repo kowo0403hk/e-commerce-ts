@@ -1,40 +1,64 @@
 import { FC, useState, useEffect } from "react";
 import StripeCheckout, { Token } from "react-stripe-checkout";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const KEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY as string;
 
-const Pay: FC = () => {
+interface ReduxCartProduct {
+  _id?: number;
+  title?: string;
+  desc?: string;
+  img?: string;
+  categories?: string[] | null;
+  size?: string[];
+  color?: string[];
+  price?: number;
+  inStock?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+  quantity: number;
+  selectedColor: string;
+  selectedSize: string;
+}
+
+interface IPay {
+  children: React.ReactNode;
+  cart: {
+    products: ReduxCartProduct;
+    quantity: number;
+    subtotal: number;
+  };
+}
+
+const Pay: FC<IPay> = ({ children, cart }: IPay) => {
   const [stripeToken, setStripeToken] = useState<Token | null>(null);
 
   const onToken = (token: Token | null) => {
     setStripeToken(token);
   };
 
+  const history = useHistory();
+
   useEffect(() => {
     const makeRequest = async () => {
       try {
         const res = await axios.post("http://localhost:8080/api/payments", {
           tokenId: stripeToken!.id,
-          amount: 3000,
+          amount: cart.subtotal * 1.12 * 100,
         });
+
         console.log(res.data);
+        history.push("/success");
       } catch (err) {
         console.log(err);
       }
     };
     stripeToken! && makeRequest();
-  }, [stripeToken]);
+  }, [stripeToken, cart.subtotal, history]);
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <div>
       {stripeToken ? (
         <span>Processing...Please wait.</span>
       ) : (
@@ -43,27 +67,18 @@ const Pay: FC = () => {
           image="https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/logo.png?raw=true"
           billingAddress
           shippingAddress
-          description="Your total is $30"
-          amount={3000}
+          description={
+            "Your total is $" +
+            ((cart.subtotal * 1.12) / 100).toFixed(2) +
+            " CAD."
+          }
+          amount={cart.subtotal * 1.12}
           token={onToken}
           currency="cad"
           stripeKey={KEY}
           // I additionally added a children: React.ReactNode key-value pair to its interface, checkout the documentation
         >
-          <button
-            style={{
-              border: "none",
-              width: 120,
-              borderRadius: 5,
-              padding: "20px",
-              backgroundColor: "black",
-              color: "white",
-              fontWeight: "600",
-              cursor: "pointer",
-            }}
-          >
-            Pay Now
-          </button>
+          {children}
         </StripeCheckout>
       )}
     </div>

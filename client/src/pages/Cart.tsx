@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
+import Pay from "../components/Pay";
 
 const Container = styled.div``;
 
@@ -127,7 +128,7 @@ const Summary = styled.div`
   border: 0.5px solid lightgray;
   border-radius: 10px;
   padding: 20px;
-  height: 50vh;
+  height: 60vh;
 `;
 
 const SummaryTitle = styled.h1`
@@ -220,7 +221,7 @@ const Cart: FC = () => {
         <Top>
           <TopButton>Continue Picking Piggies</TopButton>
           <TopTexts>
-            <TopText>Shopping Cart(2)</TopText>
+            <TopText>Shopping Cart({cart.quantity})</TopText>
             <TopText>Your Whislist</TopText>
           </TopTexts>
           <TopButton filled={true}>Checkout</TopButton>
@@ -231,15 +232,21 @@ const Cart: FC = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 109.98</SummaryItemPrice>
+              <SummaryItemPrice>
+                $ {(cart.subtotal / 100).toFixed(2)}
+              </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>GST</SummaryItemText>
-              <SummaryItemPrice>$ 5.50</SummaryItemPrice>
+              <SummaryItemPrice>
+                $ {((cart.subtotal * 0.05) / 100).toFixed(2)}
+              </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>PST</SummaryItemText>
-              <SummaryItemPrice>$ 7.70</SummaryItemPrice>
+              <SummaryItemPrice>
+                $ {((cart.subtotal * 0.07) / 100).toFixed(2)}
+              </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -251,9 +258,13 @@ const Cart: FC = () => {
             </SummaryItem>
             <SummaryItem total={true}>
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 123.18</SummaryItemPrice>
+              <SummaryItemPrice>
+                $ {((cart.subtotal * 1.12) / 100).toFixed(2)}
+              </SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            <Button>
+              <Pay cart={cart}>CHECKOUT NOW</Pay>
+            </Button>
           </Summary>
         </Bottom>
       </Wrapper>
