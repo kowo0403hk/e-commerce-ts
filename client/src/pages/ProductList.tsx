@@ -38,6 +38,13 @@ const Select = styled.select`
 
 const Option = styled.option``;
 
+const Error = styled.div`
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 20px;
+  margin-bottom: 20px;
+`;
+
 interface IFilters {
   categories?: string;
   size?: string;
@@ -48,18 +55,23 @@ const ProductList: FC = () => {
 
   const [cat, setCat] = useState<string | null>(
     location.pathname.split("/")[2]
-  ); //Pearl or Buchi or Stuffy
+  ); //Pearl or Spotted or Stuffy
 
   const [filters, setFilters] = useState<IFilters>({});
 
   const [sort, setSort] = useState("Newest");
+
+  const [hasProduct, setHasProduct] = useState(true);
 
   const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const value = e.target.value;
 
     if (value.includes("All")) {
       setFilters({});
-      setCat(null);
+
+      if (value === "All Types") {
+        setCat(null);
+      }
     } else {
       setFilters({
         ...filters,
@@ -89,7 +101,7 @@ const ProductList: FC = () => {
               <Option disabled>Types</Option>
               <Option>All Types</Option>
               <Option>Pearl</Option>
-              <Option>Buchi</Option>
+              <Option>Spotted</Option>
               <Option>Stuffy</Option>
             </Select>
             <Select name="size" onChange={handleFilter}>
@@ -113,7 +125,13 @@ const ProductList: FC = () => {
           </FilterText>
         </Filter>
       </FilterContainer>
-      <Products cat={cat} filters={filters} sort={sort} />
+      <Products
+        cat={cat}
+        filters={filters}
+        sort={sort}
+        setHasProduct={setHasProduct}
+      />
+      {!hasProduct && <Error>Sorry, no piggies found!</Error>}
       <NewsLetter />
       <Footer />
     </Container>

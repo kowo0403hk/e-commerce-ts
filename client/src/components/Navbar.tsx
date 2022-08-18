@@ -73,8 +73,6 @@ const MenuItem = styled.div`
 const Navbar: FC = () => {
   const quantity = useSelector((state: any) => state.cart.quantity);
 
-  console.log(quantity);
-
   return (
     <Container>
       <Wrapper>
@@ -103,7 +101,9 @@ const Navbar: FC = () => {
           <MenuItem>Sign In</MenuItem>
           <MenuItem>
             <Badge badgeContent={quantity} color="primary">
-              <ShoppingCartOutlined />
+              <Link to="/cart" style={{ color: "black" }}>
+                <ShoppingCartOutlined />
+              </Link>
             </Badge>
           </MenuItem>
         </Right>

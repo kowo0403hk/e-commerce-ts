@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import Product from "./Product";
 import axios from "axios";
@@ -19,6 +19,7 @@ interface ProductsProps {
   cat: string | null;
   filters: IFilters;
   sort: string;
+  setHasProduct: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IProduct {
@@ -35,7 +36,12 @@ interface IProduct {
   updatedAt?: Date;
 }
 
-const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
+const Products: FC<ProductsProps> = ({
+  cat,
+  filters,
+  sort,
+  setHasProduct,
+}: ProductsProps) => {
   const [products, setProducts] = useState<IProduct[] | []>([]);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[] | []>([]);
 
@@ -59,17 +65,17 @@ const Products: FC<ProductsProps> = ({ cat, filters, sort }: ProductsProps) => {
   // for filtering products by category and filters(types and sizes)
   useEffect(() => {
     if (cat) {
-      setFilteredProducts(
-        products.filter((item: any) =>
-          Object.entries(filters).every(([key, value]) =>
-            item[key].includes(value)
-          )
+      const filterResult = products.filter((item: any) =>
+        Object.entries(filters).every(([key, value]) =>
+          item[key].includes(value)
         )
       );
+      setFilteredProducts(filterResult);
+      !filterResult[0] ? setHasProduct(false) : setHasProduct(true);
     } else {
       setFilteredProducts(products);
     }
-  }, [products, cat, filters]);
+  }, [products, cat, filters, setHasProduct]);
 
   // for sorting products
   useEffect(() => {

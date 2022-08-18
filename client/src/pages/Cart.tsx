@@ -5,6 +5,7 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
 
 const Container = styled.div``;
 
@@ -158,15 +159,66 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+interface ReduxCartProduct {
+  _id?: number;
+  title?: string;
+  desc?: string;
+  img?: string;
+  categories?: string[] | null;
+  size?: string[];
+  color?: string[];
+  price?: number;
+  inStock?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+  quantity: number;
+  selectedColor: string;
+  selectedSize: string;
+}
+
 const Cart: FC = () => {
+  const cart = useSelector((state: any) => state.cart);
+
+  const mappedCartProducts = cart.products.map((product: ReduxCartProduct) => {
+    return (
+      <>
+        <Product>
+          <ProductDetails>
+            <Image src={product.img} />
+            <Description>
+              <ProductName>{product.title}</ProductName>
+              <ProductId>
+                <strong>ID:</strong> {product._id}
+              </ProductId>
+              <ProductColor color={product.selectedColor} />
+              <ProductSize>
+                <strong>Size:</strong> {product.selectedSize}
+              </ProductSize>
+            </Description>
+          </ProductDetails>
+          <PriceDetails>
+            <ProductAmountContainer>
+              <Remove style={{ cursor: "pointer" }} />
+              <ProductAmount>{product.quantity}</ProductAmount>
+              <Add style={{ cursor: "pointer" }} />
+            </ProductAmountContainer>
+            <ProductPrice>
+              ${((product!.price! * product.quantity) / 100).toFixed(2)}
+            </ProductPrice>
+          </PriceDetails>
+        </Product>
+        <Hr />
+      </>
+    );
+  });
   return (
     <Container>
       <Navbar />
       <Announcement />
       <Wrapper>
-        <Title>Your Cart</Title>
+        <Title>Your Piggy Cart</Title>
         <Top>
-          <TopButton>Continue Shopping</TopButton>
+          <TopButton>Continue Picking Piggies</TopButton>
           <TopTexts>
             <TopText>Shopping Cart(2)</TopText>
             <TopText>Your Whislist</TopText>
@@ -174,60 +226,7 @@ const Cart: FC = () => {
           <TopButton filled={true}>Checkout</TopButton>
         </Top>
         <Bottom>
-          <Info>
-            <Product>
-              <ProductDetails>
-                <Image src="https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/shoe.png?raw=true" />
-                <Description>
-                  <ProductName>
-                    <strong>Product:</strong> RUNNER SHOES
-                  </ProductName>
-                  <ProductId>
-                    <strong>ID:</strong> 1234567
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <strong>Size:</strong> 39
-                  </ProductSize>
-                </Description>
-              </ProductDetails>
-              <PriceDetails>
-                <ProductAmountContainer>
-                  <Remove style={{ cursor: "pointer" }} />
-                  <ProductAmount>1</ProductAmount>
-                  <Add style={{ cursor: "pointer" }} />
-                </ProductAmountContainer>
-                <ProductPrice>$79.99</ProductPrice>
-              </PriceDetails>
-            </Product>
-            <Hr />
-            <Product>
-              <ProductDetails>
-                <Image src="https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/t-shirt.png?raw=true" />
-                <Description>
-                  <ProductName>
-                    <b>Product:</b> HAKURA T-SHIRT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="gray" />
-                  <ProductSize>
-                    <b>Size:</b> M
-                  </ProductSize>
-                </Description>
-              </ProductDetails>
-              <PriceDetails>
-                <ProductAmountContainer>
-                  <Remove style={{ cursor: "pointer" }} />
-                  <ProductAmount>1</ProductAmount>
-                  <Add style={{ cursor: "pointer" }} />
-                </ProductAmountContainer>
-                <ProductPrice>$ 29.99</ProductPrice>
-              </PriceDetails>
-            </Product>
-            <Hr />
-          </Info>
+          <Info>{mappedCartProducts}</Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
