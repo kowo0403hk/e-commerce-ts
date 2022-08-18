@@ -8,6 +8,8 @@ import NewsLetter from "../components/NewsLetter";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { apiRequest } from "../helpers/requestMethods";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
 
@@ -141,9 +143,11 @@ const Product: FC = () => {
 
   const [quantity, setQuantity] = useState(1);
 
-  const [color, setColor] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
 
-  const [size, setSize] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -159,7 +163,7 @@ const Product: FC = () => {
   }, [id]);
 
   const mappedColors = product?.color?.map((c: string) => (
-    <FilterColor color={c} key={c} onClick={() => setColor(c)} />
+    <FilterColor color={c} key={c} onClick={() => setSelectedColor(c)} />
   ));
 
   const mappedSizes = product?.size?.map((s: string) => (
@@ -173,7 +177,7 @@ const Product: FC = () => {
   };
 
   const handleClick = () => {
-    // update cart
+    dispatch(addProduct({ ...product, quantity, selectedColor, selectedSize }));
   };
 
   return (
@@ -197,7 +201,7 @@ const Product: FC = () => {
               <FilterTitle>Size</FilterTitle>
               <FilterSize
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                  setSize(e.target.value)
+                  setSelectedSize(e.target.value)
                 }
               >
                 {mappedSizes}

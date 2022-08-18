@@ -1,4 +1,4 @@
-// create a global store
+// create a global store that every page can have access
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./cartRedux";
 

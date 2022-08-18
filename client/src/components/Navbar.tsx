@@ -3,6 +3,8 @@ import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import { FC } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   height: 60px;
@@ -49,6 +51,7 @@ const Center = styled.div`
 
 const Logo = styled.h1`
   font-weight: bold;
+  cursor: pointer;
   ${mobile({ fontSize: "24px" })}
 `;
 
@@ -68,6 +71,10 @@ const MenuItem = styled.div`
 `;
 
 const Navbar: FC = () => {
+  const quantity = useSelector((state: any) => state.cart.quantity);
+
+  console.log(quantity);
+
   return (
     <Container>
       <Wrapper>
@@ -79,13 +86,23 @@ const Navbar: FC = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>PigCasso</Logo>
+          <Logo>
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: "black",
+              }}
+            >
+              PigCasso
+            </Link>
+          </Logo>
         </Center>
         <Right>
           <MenuItem>Register</MenuItem>
           <MenuItem>Sign In</MenuItem>
           <MenuItem>
-            <Badge badgeContent={4} color="primary">
+            <Badge badgeContent={quantity} color="primary">
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>

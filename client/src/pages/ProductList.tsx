@@ -95,8 +95,8 @@ const ProductList: FC = () => {
             <Select name="size" onChange={handleFilter}>
               <Option disabled>Sizes</Option>
               <Option>All Sizes</Option>
-              <Option>Mini</Option>
               <Option>Micro</Option>
+              <Option>Mini</Option>
               <Option>Medium</Option>
               <Option>One Size</Option>
             </Select>
