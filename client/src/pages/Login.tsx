@@ -1,6 +1,8 @@
-import { FC } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
+import { login } from "../redux/apiCalls";
 import { mobile } from "../responsive";
+import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div`
   width: 100vw;
@@ -41,7 +43,7 @@ const Input = styled.input`
   padding: 10px;
 `;
 
-const Button = styled.button`
+const Button = styled.input`
   width: 40%;
   border: none;
   padding: 15px 20px;
@@ -49,6 +51,10 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  &:disabled {
+    color: green;
+    cursor: not-allowed;
+  }
 `;
 
 const Link = styled.a`
@@ -58,15 +64,57 @@ const Link = styled.a`
   cursor: pointer;
 `;
 
+const Error = styled.span`
+  color: red;
+`;
+
+interface IUser {
+  username?: string;
+  password?: string;
+}
+
 const Login: FC = () => {
+  const [user, setUser] = useState<IUser>({});
+  const { username, password } = user;
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state: any) => state.user);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setUser((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+
+  const handleClick = (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>Sign In</Title>
         <Form>
-          <Input placeholder="username" />
-          <Input placeholder="password" />
-          <Button>Login</Button>
+          <Input
+            placeholder="username"
+            name="username"
+            value={user.username ? user.username : ""}
+            onChange={handleChange}
+          />
+          <Input
+            placeholder="password"
+            type="password"
+            name="password"
+            value={user.password ? user.password : ""}
+            onChange={handleChange}
+          />
+          <Button
+            type="submit"
+            onClick={handleClick}
+            value="Login"
+            disabled={isFetching}
+          />
+          {error && <Error>Something went wrong...</Error>}
           <Link>Forgot password?</Link>
           <Link>Create a new account</Link>
         </Form>

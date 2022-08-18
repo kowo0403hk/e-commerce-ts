@@ -5,17 +5,19 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
 import Home from "./pages/Home";
+import Success from "./pages/Success";
 import dotenv from "dotenv";
 dotenv.config({ path: "../.env" });
 
 const App: FC = () => {
-  const user = false;
+  const user = useSelector((state: any) => state.user.currentUser);
 
   return (
     <Router>
@@ -31,6 +33,9 @@ const App: FC = () => {
         </Route>
         <Route path="/cart">
           <Cart />
+        </Route>
+        <Route path="/success">
+          <Success />
         </Route>
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
         <Route path="/register">
