@@ -92,7 +92,7 @@ const Navbar: FC = () => {
                 color: "black",
               }}
             >
-              PigCasso
+              PiggyLand
             </Link>
           </Logo>
         </Center>

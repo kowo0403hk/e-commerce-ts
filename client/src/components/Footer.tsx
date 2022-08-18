@@ -87,9 +87,9 @@ const Footer: FC = () => {
   return (
     <Container>
       <Left>
-        <Logo>PigCasso</Logo>
+        <Logo>PiggyLand</Logo>
         <Description>
-          PigCasso is an e-commerce application built with React, TypeScript,
+          PiggyLand is an e-commerce application built with React, TypeScript,
           Express, and MongoDB. For more information, please visit their
           official websites.
         </Description>

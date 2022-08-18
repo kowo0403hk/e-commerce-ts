@@ -39,7 +39,7 @@ const Pay: FC = () => {
         <span>Processing...Please wait.</span>
       ) : (
         <StripeCheckout
-          name="PigCasso"
+          name="PiggyLand"
           image="https://github.com/kowo0403hk/e-commerce-ts/blob/main/client/docs/logo.png?raw=true"
           billingAddress
           shippingAddress

@@ -154,11 +154,12 @@ const Product: FC = () => {
       try {
         const res = await apiRequest.get(`/products/find/${id}`);
         setProduct(res.data);
+        setSelectedColor(res.data.color[0]);
+        setSelectedSize(res.data.size[0]);
       } catch (err) {
         console.log(err);
       }
     };
-
     getProduct();
   }, [id]);
 
