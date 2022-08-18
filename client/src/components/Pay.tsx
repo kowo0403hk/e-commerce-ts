@@ -49,7 +49,7 @@ const Pay: FC<IPay> = ({ children, cart }: IPay) => {
         });
 
         console.log(res.data);
-        history.push("/success");
+        history.push("/success", { data: res.data });
       } catch (err) {
         console.log(err);
       }
