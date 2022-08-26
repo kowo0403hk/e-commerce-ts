@@ -48,7 +48,7 @@ const Pay: FC<IPay> = ({ children, cart }: IPay) => {
           amount: cart.subtotal * 1.12 * 100,
         });
 
-        history.push("/success", { data: res.data });
+        history.push("/success", { stripeData: res.data, products: cart });
       } catch (err) {
         console.log(err);
       }
