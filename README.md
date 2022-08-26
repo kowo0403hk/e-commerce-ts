@@ -28,6 +28,11 @@ Step 3: Go to http://localhost:3000 to start shopping.
 ![Register - unmatched password](https://github.com/kowo0403hk/e-commerce-ts/blob/main/screenshots/Register%20-%20unmatched%20password.png?raw=true)
 ![Login](https://github.com/kowo0403hk/e-commerce-ts/blob/main/screenshots/Login.png?raw=true)
 
+### Products
+
+![Products List](https://github.com/kowo0403hk/e-commerce-ts/blob/main/screenshots/Products%20Lists.png?raw=true)
+![Product Details](https://github.com/kowo0403hk/e-commerce-ts/blob/main/screenshots/Product%20Details.png?raw=true)
+
 ### Cart and Payment
 
 ![Cart](https://github.com/kowo0403hk/e-commerce-ts/blob/main/screenshots/Cart.png?raw=true)
