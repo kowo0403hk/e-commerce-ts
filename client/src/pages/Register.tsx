@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
@@ -55,23 +55,90 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const Error = styled.div`
+  color: red;
+`;
+
+const Registered = styled.div`
+  color: green;
+`;
+
+interface INewUser {
+  username?: string;
+  email?: string;
+  password?: string;
+  confirmedPassword?: string;
+}
+
 const Register: FC = () => {
+  const [newUser, setNewUser] = useState<INewUser>({});
+  const { username, email, password, confirmedPassword } = newUser;
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [registered, setRegistered] = useState(false);
+  const [registeredMsg, setRegisteredMsg] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRegisteredMsg("");
+    setRegistered(false);
+    setErrorMsg("");
+    setError(false);
+    setNewUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!username || !email || !password || !confirmedPassword) {
+      setError(true);
+      setErrorMsg("Please complete all the fields");
+    } else if (password !== confirmedPassword) {
+      setError(true);
+      setErrorMsg("Please ensure passwords are the same.");
+    } else {
+      setRegistered(true);
+      setRegisteredMsg("User registered successfully");
+    }
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>Create an Account</Title>
         <Form>
-          <Input placeholder="first name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder="confirm password" />
+          <Input
+            name="username"
+            placeholder="username"
+            value={username}
+            onChange={handleChange}
+          />
+          <Input
+            name="email"
+            type="email"
+            placeholder="email"
+            value={email}
+            onChange={handleChange}
+          />
+          <Input
+            name="password"
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={handleChange}
+          />
+          <Input
+            name="confirmedPassword"
+            type="password"
+            placeholder="confirm password"
+            value={confirmedPassword}
+            onChange={handleChange}
+          />
+          {error && <Error>{errorMsg}</Error>}
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>Create</Button>
+          {registered && <Registered>{registeredMsg}</Registered>}
+          <Button onClick={handleClick}>Create</Button>
         </Form>
       </Wrapper>
     </Container>
