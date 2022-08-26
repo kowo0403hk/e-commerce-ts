@@ -54,7 +54,7 @@ const Pay: FC<IPay> = ({ children, cart }: IPay) => {
       }
     };
     stripeToken! && makeRequest();
-  }, [stripeToken, cart.subtotal, history]);
+  }, [stripeToken, cart, history]);
 
   return (
     <div>

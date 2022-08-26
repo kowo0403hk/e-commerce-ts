@@ -9,7 +9,7 @@ const paymentRouter = (): IRouter => {
     stripe.charges.create(
       {
         source: req.body.tokenId,
-        amount: req.body.amount / 100,
+        amount: req.body.amount,
         currency: "cad",
       },
       (stripeErr: StripeRawError, stripeRes: any) => {

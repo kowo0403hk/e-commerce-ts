@@ -97,8 +97,16 @@ const Navbar: FC = () => {
           </Logo>
         </Center>
         <Right>
-          <MenuItem>Register</MenuItem>
-          <MenuItem>Sign In</MenuItem>
+          <MenuItem>
+            <Link to="/register" style={{ color: "black" }}>
+              Register
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/login" style={{ color: "black" }}>
+              Sign In
+            </Link>
+          </MenuItem>
           <MenuItem>
             <Badge badgeContent={quantity} color="primary">
               <Link to="/cart" style={{ color: "black" }}>
