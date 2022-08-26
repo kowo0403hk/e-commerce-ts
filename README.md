@@ -1,4 +1,4 @@
-# PiggyLand - eCommerce-ts
+# PiggyLand - eCommerce-ts 🐷
 
 Welcome to PiggyLand! This is an eCommerce project built with MERN stack (database is MongoDB Atlas instead of MongoDB), and Stripe API. Users can purchase real piggies or piggy stuffies from PiggyLand.
 
